@@ -53,7 +53,7 @@ export function applyDecorator(editor: Editor, decorator: IViewDecorator) {
       middleNodes.forEach((node) => {
         const middleRange = new Range();
 
-        middleRange.selectNodeContents(node);
+        middleRange.selectNode(node);
         createDecoratorByRange(decorator, middleRange);
       });
 
