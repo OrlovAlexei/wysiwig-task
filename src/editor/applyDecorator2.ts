@@ -50,7 +50,9 @@ export function applyDecorator(editor: Editor, decorator: IViewDecorator) {
         decorateFocusNode(focus.node, focus.offset, decorator);
       }
 
-      middleNodes.forEach((node) => {
+      const res: Node[] = [];
+      middleNodes.forEach((mn) => res.push(...getLineChildren(mn)));
+      res.forEach((node) => {
         const middleRange = new Range();
         middleRange.selectNodeContents(node);
         createDecoratorByRange(decorator, middleRange);
