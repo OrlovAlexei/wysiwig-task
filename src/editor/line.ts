@@ -1,5 +1,5 @@
 export function createLine() {
-  const p = document.createElement("p");
+  const p = document.createElement("div");
   const br = document.createElement("br");
 
   p.appendChild(br);
@@ -8,7 +8,7 @@ export function createLine() {
 
 export function isLine(target: Node): boolean {
   if (target instanceof Element) {
-    return target.localName === "p";
+    return target.localName === "div";
   }
 
   return false;
