@@ -1,14 +1,20 @@
+import { DECORATOR_NAME_ATTRIBUTE } from "./decorator";
+
+const tagName = "div";
+const lineDecoratorName = "line";
+
 export function createLine() {
-  const p = document.createElement("div");
+  const line = document.createElement(tagName);
+  line.setAttribute(DECORATOR_NAME_ATTRIBUTE, lineDecoratorName);
   const br = document.createElement("br");
 
-  p.appendChild(br);
-  return p;
+  line.appendChild(br);
+  return line;
 }
 
 export function isLine(target: Node): boolean {
   if (target instanceof Element) {
-    return target.localName === "div";
+    return target.getAttribute(DECORATOR_NAME_ATTRIBUTE) === lineDecoratorName;
   }
 
   return false;

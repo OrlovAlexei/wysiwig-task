@@ -33,7 +33,8 @@ export function pathCopy(
   )
     .filter((el) => isDecorator(el as Element))
     .map((el) => el.getAttribute(DECORATOR_NAME_ATTRIBUTE))
-    .map((dec) => decoratorsInfo.find((d) => d.decoratorName === dec));
+    .map((dec) => decoratorsInfo.find((d) => d.decoratorName === dec))
+    .filter((v) => Boolean(v));
 
   if (topDec.length) {
     const nestedDecTree = createNestedDecorators(
