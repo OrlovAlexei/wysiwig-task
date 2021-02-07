@@ -60,11 +60,9 @@ export function applyDecorator(editor: Editor, decorator: IViewDecorator) {
       return;
     }
 
-    const childInsteadLine = getLineChildren(
-      Array.from(range.commonAncestorContainer.childNodes)
-    );
+    const childInsteadLine = getLineChildren(range.commonAncestorContainer);
 
-    if (childInsteadLine.length) {
+    if (childInsteadLine.length > 1) {
       decorateAnchorNode(anchor.node, anchor.offset, decorator);
       decorateFocusNode(focus.node, focus.offset, decorator);
 

@@ -24,16 +24,14 @@ export function getNodesBetweenNodes(
   return result.slice(1, -1);
 }
 
-export function getLineChildren(nodes: Node[]): Node[] {
+export function getLineChildren(node: Node): Node[] {
   const result: Node[] = [];
 
-  nodes.forEach((node) => {
-    if (node instanceof Element && isLine(node)) {
-      return result.push(...Array.from(node.childNodes));
-    }
+  if (node instanceof Element && isLine(node)) {
+    result.push(node);
+  }
 
-    return result.push(node);
-  });
+  node.childNodes.forEach((n) => result.push(...getLineChildren(n)));
 
   return result;
 }
