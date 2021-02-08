@@ -4,6 +4,7 @@ import { getCss, inliningClassesInDecorator } from "./cssRules";
 import { DECORATOR_NAME_ATTRIBUTE, IViewDecorator } from "./decorator";
 
 import { Editor } from "./editor";
+import { isLine } from "./line";
 
 export function pathCopy(
   event: ClipboardEvent,
@@ -22,6 +23,13 @@ export function pathCopy(
 
   const selectionContent = selection.getRangeAt(0).cloneContents();
   const userRange = selection.getRangeAt(0);
+
+  const all = getAllNodes(Array.from(selectionContent.childNodes));
+  const lines = all.filter((n) => n instanceof Element && isLine(n));
+
+  lines.forEach((line) =>
+    line.parentNode?.replaceChild(changeTag(line as Element, "div"), line)
+  );
 
   const cssRules = getCss();
 
@@ -208,3 +216,16 @@ export function getLastChild(target: Node): Node {
 
 //   return wrapped;
 // }
+
+export function changeTag(target: Element, tagName: string) {
+  const tagged = document.createElement(tagName);
+  tagged.innerHTML = target.innerHTML;
+  cloneAttributes(tagged, target);
+  return tagged;
+}
+
+function cloneAttributes(target: Element, source: Element) {
+  Array.from(source.attributes).forEach((attr) => {
+    if (attr.nodeValue) target.setAttribute(attr.nodeName, attr.nodeValue);
+  });
+}

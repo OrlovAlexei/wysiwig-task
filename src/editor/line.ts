@@ -1,6 +1,6 @@
 import { DECORATOR_NAME_ATTRIBUTE } from "./decorator";
 
-const tagName = "div";
+const tagName = "p";
 const lineDecoratorName = "line";
 
 export function createLine() {

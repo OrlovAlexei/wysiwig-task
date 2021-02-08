@@ -2,6 +2,7 @@ import { applyDecorator } from "./applyDecorator2";
 import { Cleaner } from "./cleaner";
 import { IViewDecorator } from "./decorator";
 import { createLine } from "./line";
+import { pathPaste } from "./pathPaste";
 import { pathCopy } from "./pathCopy";
 
 import { createDefaultRange } from "./range";
@@ -43,6 +44,10 @@ export class Editor {
 
     this.editorRef.addEventListener("copy", (ev: ClipboardEvent) => {
       pathCopy(ev, this);
+    });
+
+    this.editorRef.addEventListener("paste", (ev: ClipboardEvent) => {
+      pathPaste(ev);
     });
 
     this.editorRef.addEventListener("cut", (ev: ClipboardEvent) => {
